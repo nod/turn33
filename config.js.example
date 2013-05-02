@@ -1,0 +1,6 @@
+
+module.exports = {
+  Auth: 'YOUR AUTH',
+  UserId: 'YOUR ID',
+  RoomId: 'YOUR ROOM'
+};
