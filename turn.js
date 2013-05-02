@@ -3,7 +3,7 @@ var cfg = require('./config');
 
 var bot = new Bot(cfg.Auth, cfg.UserId, cfg.RoomId);
 var amDj = false;
-
+var skip_mine_if_djing = true;
 
 var cmd_bop = function(data) {
   bot.vote('up')
@@ -22,6 +22,12 @@ var cmd_dj = function(data) {
 }
 cmd_dj.help = 'toggle bot dj mode';
 
+var cmd_autoskip = function(data) {
+  skip_mine_if_djing = !skip_mine_if_djing;
+  bot.speak('autoskip now set to  ' + skip_mine_if_djing);
+}
+cmd_autoskip.help = 'toggle bot autoskipping his songs if djing';
+
 var cmd_skip = function(data) {
   bot.skip();
   bot.speak('skipping song. As if I care...');
@@ -36,6 +42,7 @@ var cmd_help = function(data) {
 cmd_help.help = 'this cruft';
 
 var cmds = {
+  autoskip: cmd_autoskip,
   bop: cmd_bop,
   dj: cmd_dj,
   skip: cmd_skip,
@@ -68,6 +75,8 @@ bot.on('newsong', function (data) {
     } else {
       bot.speak('Not a fan.');
     }
+  } else {
+    if (skip_mine_if_djing) bot.skip();
   }
 });
 
