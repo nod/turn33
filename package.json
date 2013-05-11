@@ -1,0 +1,10 @@
+{
+  "name": "turnbot",
+  "description": "spin those tunez",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "mongoose": "3.x",
+	"ttapi": "2.1.x"
+  }
+}
